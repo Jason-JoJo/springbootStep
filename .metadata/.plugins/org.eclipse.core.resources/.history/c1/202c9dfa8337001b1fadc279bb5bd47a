@@ -1,0 +1,19 @@
+package com.jason.spring.web.springbootfirstwebapplication.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class loginController {
+
+	@RequestMapping("/login")
+	public String loginCon() {
+		return "login";
+	}
+	
+	@GetMapping("/")
+	public String loginConSl() {
+		return "login";
+	}
+}
