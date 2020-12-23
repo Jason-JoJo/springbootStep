@@ -56,4 +56,15 @@ public class TodolistController {
 	 * 因此客戶端接收到的響應是來自轉發後的目標方法，但是瀏覽器呈現的 URL 卻並不會改變，且 forward 不能將參數轉發出去。
 	 *  
 	 */
+	
+	
+	
+	@RequestMapping(value="/delete-todo",method = RequestMethod.GET)
+	public String deleteTodo(@RequestParam int id) {
+		todoService.deleteTodo(id);
+		
+		return "redirect:/todolist";
+	}
+	
+	
 }
