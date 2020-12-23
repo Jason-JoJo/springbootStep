@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.example.demo.model.Todo;
 import com.example.demo.service.LoginService;
 import com.example.demo.service.TodoService;
 
@@ -34,15 +35,16 @@ public class TodolistController {
 
 	@RequestMapping(value="/addTodolist",method = RequestMethod.GET)
 	public String showTodos(ModelMap model) {
-		String name = (String)model.get("name");
-//	
-		model.put("todos", todoService.retrieveTodos(name));
+//		String name = (String)model.get("name");
+		model.addAttribute("todo", new Todo(0, (String) model.get("name"), "Default Desc",
+				new Date(), false));
+//		model.put("todos", todoService.retrieveTodos(name));
 		return "todo";
 	}
 	@RequestMapping(value="/addTodolist",method = RequestMethod.POST)
-	public String addTodo(ModelMap model,@RequestParam String desc) {
+	public String addTodo(ModelMap model,Todo todo) {
 //		String name = (String)model.get("name");	// 因為有 @SessionAttributes("name") 已經加進Session 所以可以取道name
-		todoService.addTodo((String)model.get("name"), desc, new Date(), false);
+		todoService.addTodo((String)model.get("name"),  todo.getDesc(), new Date(), false);
 //		model.put("todos", todoService.retrieveTodos(name));
 //		return "todolist";   //影片裡用這個返回會使 list 空白，但實際使用卻不會 因為我自己加了上面的。 (forward 不會傳參數)；  兩者有差別  forward  url是  http://localhost:8080/addTodolist
 		return "redirect:/todolist";	//   redirect重導後  http://localhost:8080/todolist
