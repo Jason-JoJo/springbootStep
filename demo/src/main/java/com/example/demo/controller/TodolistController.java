@@ -41,11 +41,11 @@ public class TodolistController {
 	}
 	@RequestMapping(value="/addTodolist",method = RequestMethod.POST)
 	public String addTodo(ModelMap model,@RequestParam String desc) {
-//		String name = (String)model.get("name");	//不用加 因為有 @SessionAttributes("name") 已經加進Session
+//		String name = (String)model.get("name");	// 因為有 @SessionAttributes("name") 已經加進Session 所以可以取道name
 		todoService.addTodo((String)model.get("name"), desc, new Date(), false);
 //		model.put("todos", todoService.retrieveTodos(name));
-		return "todolist";   //影片裡用這個返回會使 list 空白，但實際使用卻不會 因為我自己加了上面的。 (forward 不會傳參數)；  兩者有差別  forward  url是  http://localhost:8080/addTodolist
-//		return "redirect:/todolist";	//   redirect重導後  http://localhost:8080/todolist
+//		return "todolist";   //影片裡用這個返回會使 list 空白，但實際使用卻不會 因為我自己加了上面的。 (forward 不會傳參數)；  兩者有差別  forward  url是  http://localhost:8080/addTodolist
+		return "redirect:/todolist";	//   redirect重導後  http://localhost:8080/todolist
 	}
 	
 	/**

@@ -1,6 +1,0 @@
-server.port=8082
-logging.level.org.springframework=debug
-spring.mvc.view.prefix=/view/jsp/
-spring.mvc.view.suffix=.html
-#spring.mvc.view.prefix: /webapp/WEB-INF/jsp/
-#spring.mvc.view.suffix: .jsp

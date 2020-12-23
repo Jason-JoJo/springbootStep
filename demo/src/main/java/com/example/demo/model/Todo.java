@@ -51,15 +51,17 @@ public class Todo {
         this.targetDate = targetDate;
     }
 
+
+ 
     public boolean isDone() {
-        return isDone;
-    }
+		return isDone;
+	}
 
-    public void setDone(boolean isDone) {
-        this.isDone = isDone;
-    }
+	public void setDone(boolean isDone) {
+		this.isDone = isDone;
+	}
 
-    @Override
+	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
