@@ -13,14 +13,15 @@
 	<div class="container">
 		Add  ${name }'s TodoPage 
 
-		<form:form  method="post" modelAttribute="todo">
+		<form:form  method="post" modelAttribute="todo" action="addTodolist">
 			<fieldset class="form-group">
 				<form:label path="desc">Description</form:label> 
 				<form:input path="desc" type="text" name="desc" class="form-control" required="required"/>
+				<form:errors path="desc" cssClass="text-warning" />
+				<form:errors path="desc" cssClass="error" />
 			</fieldset>
 			<button type="submit" class="btn btn-success">Add</button>
 		</form:form>
-
 	</div>	
  <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
  <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
