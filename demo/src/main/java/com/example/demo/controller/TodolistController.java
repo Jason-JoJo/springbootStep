@@ -7,8 +7,10 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +53,7 @@ public class TodolistController {
 		}
 		
 //		String name = (String)model.get("name");	// 因為有 @SessionAttributes("name") 已經加進Session 所以可以取道name
-		todoService.addTodo((String)model.get("name"),  todo.getDesc(), new Date(), true);
+		todoService.addTodo((String)model.get("name"),  todo.getDesc(), new Date(), todo.isDone());
 //		model.put("todos", todoService.retrieveTodos(name));
 //		return "todolist";   //影片裡用這個返回會使 list 空白，但實際使用卻不會 因為我自己加了上面的。 (forward 不會傳參數)；  兩者有差別  forward  url是  http://localhost:8080/addTodolist
 		return "redirect:/todolist";	//   redirect重導後  http://localhost:8080/todolist
@@ -81,5 +83,27 @@ public class TodolistController {
 //		todoService.addTodo((String)model.get("name"),  todo.getDesc(), new Date(), true);
 //		return "redirect:/todolist";	//   redirect重導後  http://localhost:8080/todolist
 //	}
+	
+	@RequestMapping(value="/update-todo",method = RequestMethod.GET)
+	public String showUpdateTodo(@RequestParam int id,ModelMap model) {
+		System.out.println(" in GET show update");
+		Todo todo = todoService.retrieveTodo(id);
+		model.put("todo",todo);
+		
+		return "todo";
+	}
+	
+	@RequestMapping(value="/update-todo",method = RequestMethod.POST)
+	public String updateTodo(ModelMap model,@Validated Todo todo,BindingResult result) {
+		System.out.println(" in POST show update");
+		if(result.hasErrors()) {
+			return "todo";
+		}
+		todo.setUser((String)model.get("name"));
+		
+		todoService.updateTodo(todo);
+		
+		return "redirect:/todolist";
+	}
 	
 }
