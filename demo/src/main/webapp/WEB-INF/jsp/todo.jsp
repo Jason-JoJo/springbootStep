@@ -1,15 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="BIG5">
-<title>Add Todo List</title>
-<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>
 
-</head>
-<body>
 	<div class="container">
 		Add  ${name }'s TodoPage 
 
@@ -33,14 +24,5 @@
 			<button type="submit" class="btn btn-success">Add</button>
 		</form:form>
 	</div>
-
- <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
- <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
- <script src="webjars/bootstrap-datepicker/1.0.1/js/bootstrap-datepicker.js"></script>
- <script>
-		$('#targetDate').datepicker({
-			format : 'dd/mm/yyyy'
-		});
- </script>
-</body>
-</html>
+	
+<%@ include file="common/foot.jspf" %>

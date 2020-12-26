@@ -1,12 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="BIG5">
-<title>Insert title here</title>
-</head>
-<body>
-133333 ，${name }
-</body>
-</html>
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>
+
+	133333 嚗�${name }
+
+
+<%@ include file="common/foot.jspf" %>

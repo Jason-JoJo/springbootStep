@@ -1,13 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="BIG5">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>
+
 Welcome , ${name }
 ckick it <a href=/todolist> todos </a>
-</body>
-</html>
+
+<%@ include file="common/foot.jspf" %>
