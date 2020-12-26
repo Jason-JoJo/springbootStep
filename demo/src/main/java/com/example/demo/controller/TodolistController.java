@@ -1,17 +1,21 @@
 package com.example.demo.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +29,14 @@ import com.example.demo.service.TodoService;
 @Controller
 @SessionAttributes("name")
 public class TodolistController {
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		// Date - dd/MM/yyyy
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+				dateFormat, false));
+	}
 	
 	@Autowired
 	TodoService todoService;
@@ -53,7 +65,7 @@ public class TodolistController {
 		}
 		
 //		String name = (String)model.get("name");	// 因為有 @SessionAttributes("name") 已經加進Session 所以可以取道name
-		todoService.addTodo((String)model.get("name"),  todo.getDesc(), new Date(), todo.isDone());
+		todoService.addTodo((String)model.get("name"),  todo.getDesc(), todo.getTargetDate(), todo.isDone());
 //		model.put("todos", todoService.retrieveTodos(name));
 //		return "todolist";   //影片裡用這個返回會使 list 空白，但實際使用卻不會 因為我自己加了上面的。 (forward 不會傳參數)；  兩者有差別  forward  url是  http://localhost:8080/addTodolist
 		return "redirect:/todolist";	//   redirect重導後  http://localhost:8080/todolist
