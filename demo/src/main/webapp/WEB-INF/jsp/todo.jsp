@@ -11,8 +11,13 @@
 				<form:input path="desc" type="text" name="desc" class="form-control" required="required"/>
 				<form:errors path="desc" cssClass="text-warning" />
 				<form:errors path="desc" cssClass="error" />
+				
+			</fieldset>
+			<fieldset class="form-group">
 				<form:label path="targetDate">targetDate</form:label> 
 				<form:input path="targetDate"  name="targetDate" class="form-control" required="required"/>
+				<form:errors path="targetDate" cssClass="text-warning" />
+				<form:errors path="targetDate" cssClass="error" />
 				<%-- 
 				<form:label path="Done">isDone</form:label>
 				<select name="Done">

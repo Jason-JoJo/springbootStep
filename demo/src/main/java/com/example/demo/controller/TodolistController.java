@@ -44,7 +44,7 @@ public class TodolistController {
 	
 	@RequestMapping(value="/todolist",method = RequestMethod.GET)
 	public String showTodo(ModelMap model) {
-		String name = (String)model.get("name");
+		String name = getLoggedInUserName(model);
 //	
 		model.put("todos", todoService.retrieveTodos(name));
 		return "todolist";
@@ -53,7 +53,7 @@ public class TodolistController {
 	@RequestMapping(value="/addTodolist",method = RequestMethod.GET)
 	public String showTodos(ModelMap model) {
 //		String name = (String)model.get("name");
-		model.addAttribute("todo", new Todo(0, (String) model.get("name"), "Default Desc",
+		model.addAttribute("todo", new Todo(0, getLoggedInUserName(model), "Default Desc",
 				new Date(), false));
 //		model.put("todos", todoService.retrieveTodos(name));
 		return "todo";
@@ -65,7 +65,7 @@ public class TodolistController {
 		}
 		
 //		String name = (String)model.get("name");	// 因為有 @SessionAttributes("name") 已經加進Session 所以可以取道name
-		todoService.addTodo((String)model.get("name"),  todo.getDesc(), todo.getTargetDate(), todo.isDone());
+		todoService.addTodo(getLoggedInUserName(model),  todo.getDesc(), todo.getTargetDate(), todo.isDone());
 //		model.put("todos", todoService.retrieveTodos(name));
 //		return "todolist";   //影片裡用這個返回會使 list 空白，但實際使用卻不會 因為我自己加了上面的。 (forward 不會傳參數)；  兩者有差別  forward  url是  http://localhost:8080/addTodolist
 		return "redirect:/todolist";	//   redirect重導後  http://localhost:8080/todolist
@@ -111,11 +111,17 @@ public class TodolistController {
 		if(result.hasErrors()) {
 			return "todo";
 		}
-		todo.setUser((String)model.get("name"));
+		todo.setUser(getLoggedInUserName(model));
 		
 		todoService.updateTodo(todo);
 		
 		return "redirect:/todolist";
 	}
+
+	private String getLoggedInUserName(ModelMap model) {
+		return (String)model.get("name"); 
+	}
+	
+
 	
 }
